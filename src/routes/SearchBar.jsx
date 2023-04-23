@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 
+
 export function SchearchBar(props){
 
     const [value,setValue]=useState("");
     const [results,setResults]=useState([]);
     const [games,setGames]=useState(props.games);
 
-    // useEffect(() => {
-    //     fetch("https://api.npoint.io/33fe536f3a3bc2f018fb")
-    //       .then(response=>response.json())
-    //       .then(json=>setGames(json.games));
-
-    //   }, []);
-    
-    
-    
-    
     const findRef=()=>{
         const compatibleResult=[];
         const length=value.length;
@@ -23,13 +14,7 @@ export function SchearchBar(props){
         games.map((game,index)=>{
             const element={game:game,index:index};
             let include=false;
-            results.forEach(element=>{
-                if(element.index===index){
-                    include=true;
-                    return;
-                }
-            })
-            if(length>0&&game.title.substring(0, length)===value&&!include){
+            if(length>0&&game.title.substring(0, length)===value){
                 const element={game:game,index:index};
                 compatibleResult.push(element);
             }
@@ -41,13 +26,15 @@ export function SchearchBar(props){
         console.log(results);
     };
 
+
     const updateValue=(event)=>{
         const newtext = event.target.value;
-        console.log("new text="+newtext);
         setValue(newtext);
-        findRef();
     };
 
+    useEffect(() => {
+        findRef();
+      }, [value]);
 
     return(
         <>
