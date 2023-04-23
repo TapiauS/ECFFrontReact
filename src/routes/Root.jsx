@@ -1,45 +1,68 @@
+import { Outlet,useLoaderData } from "react-router-dom";
+import { SchearchBar } from "./SearchBar";
+
+export async function loader() {
+  const result = await fetch("https://api.npoint.io/33fe536f3a3bc2f018fb");
+
+  const gamesjson=await result.json();
+
+  const games=await gamesjson.games;
+
+  console.log(games);
+
+  return { games };
+};
+
 export default function Root() {
+    const { games } = useLoaderData();
+
+    console.log(games);
+
+
+
     return (
-        <><div className="row">
-            <div className="col-12">
-                <div id="topbanner">
-                    <p id="presentext">Le plaisir du jeux</p>
-                </div>
-            </div>
-            <div className="col-12">
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <img src="src/images/pictures/joie.jpg" width="300"/>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <p id="presentation">La Fabrique Gobeline est un café jeux unique en son genre, qui se distingue des autres cafés jeux par son ambiance fantastique et son décor inspiré de l'univers médiéval-fantastique. Situé dans une ruelle pittoresque, ce café est facilement identifiable grâce à sa devanture colorée et son enseigne originale.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-12">
-                <h2>Carte</h2>
-                <div className="row">
-                    <div className="col-12 col-md-6" id="carterigth">
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Potion de santé (café noir)</li>
-                            <li className="list-group-item">Potion de mana (café au lait)</li>
-                            <li className="list-group-item">Thé de dragon (thé noir épicé)</li>
-                            <li className="list-group-item">Breuvage des nains (bière artisanale)</li>
-                            <li className="list-group-item">Sang de dragon (jus de fruit rouge)</li>
-                            <li className="list-group-item"></li>
+        <><header id="topbanner">
+            <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="#">
+                        <img src="src/images/icones/logo.jpg" alt="Logo" width="30" height="30" className="d-inline-block align-text-top"/>
+                            La Fabrique Gobline
+                        </a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="/">Accueil</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="borrow">Emprunter</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="boardgame">Plus d'info</a>
+                            </li>
                         </ul>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Galette de boulanger (croissant)</li>
-                            <li className="list-group-item">Oeuf de griffon (oeuf à la coque)</li>
-                            <li className="list-group-item">Salade de la chasseresse (salade verte avec tomates, fromage de chèvre et noix)</li>
-                            <li className="list-group-item">Saucisse de l'ogre (saucisse artisanale avec purée de pommes de terre et de carottes)</li>
-                            <li className="list-group-item">Friandise du magicien (brownie au chocolat)</li>
-                        </ul>
+                        <SchearchBar games={games}/>
                     </div>
                 </div>
-            </div>
-        </div></>
+            </nav>
+        </header>
+        <main>
+            <Outlet />
+        </main>
+        <footer>
+                <nav className="navbar fixed-bottom navbar-expand-lg bg-body-tertiary">
+                    <a className="navbar-brand" href="#">®2023,La Fabrique Gobline marque déposée de la GobCorp</a>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="index.html">Politiques de confidentialité</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070719/">Informations légales</a>
+                        </li>
+                    </ul>
+                </nav>
+            </footer></>
         )
   }
