@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
+import { Outlet,useLoaderData,Link } from "react-router-dom";
 
-
-export function SchearchBar(props){
+export function SearchBar(){
 
     const [value,setValue]=useState("");
     const [results,setResults]=useState([]);
-    const [games,setGames]=useState(props.games);
 
+
+    const {games}=useLoaderData();
     const findRef=()=>{
         const compatibleResult=[];
         const length=value.length;
         console.log(length);
         games.map((game,index)=>{
-            const element={game:game,index:index};
-            let include=false;
             if(length>0&&game.title.substring(0, length)===value){
                 const element={game:game,index:index};
                 compatibleResult.push(element);
@@ -32,6 +31,7 @@ export function SchearchBar(props){
         setValue(newtext);
     };
 
+
     useEffect(() => {
         findRef();
       }, [value]);
@@ -45,11 +45,11 @@ export function SchearchBar(props){
                 </div>
                 <div className="col-12">
                     <ul className="list-group">
-                        {results.map(result => <li className="list-group-item " aria-current="true"><a href={"card/"+result.index} key={result.index}>{result.game.title}</a></li>)}
+                        {results.map(result => <li className="list-group-item " aria-current="true"><Link to={result.index} key={result.index}>{result.game.title}</Link></li>)}
                     </ul>
                 </div>
             </div>
       </form></>
-    )
+    );
 
 };

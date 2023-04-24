@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import './index.css'
+import './index.css';
 import {Index} from "./routes/Index.jsx";
 import ErrorPage from "./error-page";
 import Root , { loader as rootLoader } from "./routes/Root.jsx";
@@ -22,20 +22,21 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Index />,
-
       },
       {
         path:"borrow",
+        loader:rootLoader,
         element:<Borrow />,
       },
       {
         path:"boardgame",
+        loader:rootLoader,
         element:<Gameboard />
       },
       {
-        path: "card/:cardId",
+        path: ":cardId",
         loader: rootLoader,
-        element: <SearchResult />,
+        element: <SearchResult />
       },
     ]
   },

@@ -4,7 +4,7 @@ export function Card(props) {
 
     return(
         <>
-        <div className="col-6 col-md-3 mt-5">
+        <div className="col-6 col-md-3 mt-3">
             <div className="card" id={props.title}>
                 <img src={props.image} className="card-img-top" alt="..." />
                 <div className="card-body">

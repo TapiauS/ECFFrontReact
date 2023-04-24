@@ -1,5 +1,10 @@
+import { Footer } from './Footer';
+import './Index.css';
+import { Outlet,useLoaderData,Link } from "react-router-dom";
+
 export function Index(){
-    return(<><div className="row">
+    return(
+        <><div className="row">
             <div className="col-12">
                 <div id="topbanner">
                     <p id="presentext">Le plaisir du jeux</p>
@@ -8,7 +13,7 @@ export function Index(){
             <div className="col-12">
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <img src="src/images/pictures/joie.jpg" width="300"/>
+                        <img src="src/images/pictures/joie.jpg" width="300" />
                     </div>
                     <div className="col-12 col-md-6">
                         <p id="presentation">La Fabrique Gobeline est un café jeux unique en son genre, qui se distingue des autres cafés jeux par son ambiance fantastique et son décor inspiré de l'univers médiéval-fantastique. Situé dans une ruelle pittoresque, ce café est facilement identifiable grâce à sa devanture colorée et son enseigne originale.</p>
@@ -39,5 +44,7 @@ export function Index(){
                     </div>
                 </div>
             </div>
-        </div></>)
+        </div>
+        <Footer class="navbar navbar-expand-lg fixed-bottom bg-body-tertiary" brand="®2023,La Fabrique Gobline marque déposée de la GobCorp"></Footer>
+        </>)
 };
