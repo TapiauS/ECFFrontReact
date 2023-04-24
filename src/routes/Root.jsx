@@ -65,4 +65,4 @@ export default function Root() {
                 </nav>
             </footer></>
         )
-  }
+  };
